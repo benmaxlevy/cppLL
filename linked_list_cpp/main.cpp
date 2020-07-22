@@ -29,6 +29,18 @@ public:
         return 0;
     }
 
+    int show_one_value(int index) {
+        struct Node* node = this->head; //store a pointer to the head node in variable node.
+        for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
+            if (i == index) {  //check if i is equal to the index passed
+                cout << node->value << endl;; //if it is, print the value of the node
+                return 0;
+            } else {
+                node = node->next; //if it isn't, set node to the next node
+            }
+        }
+    }
+
     int show() {
         struct Node* node = this->head; //make a pointer to the head node
         while (node != nullptr) { //check if the pointer to the node is not null
