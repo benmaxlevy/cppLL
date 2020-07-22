@@ -29,7 +29,7 @@ public:
     }
 
     int add_after(int index, int value) {
-        struct Node* node = this->head; //store a pointer to the head node in variable node.
+        
     }
 
     int show_one_value(int index) {
