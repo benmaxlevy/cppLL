@@ -5,7 +5,7 @@ using namespace std;
 
 struct Node {
     int value;
-    struct Node* next; //create the pointer to the next Node
+    struct Node* next = nullptr; //create the pointer to the next Node
 };
 
 class LL {
@@ -30,16 +30,32 @@ public:
 
     int add_after(int index, int value) {
         struct Node* node = this->head; //store a pointer to the head node (so that we can loop thru the ll).
-        for (int i = 0; i < index; i++) { //for loop that increments i by 1 if i is less than the index passed.
-            if (i == index && node->next != nullptr) {  //check if i is equal to the index passed
-                struct Node* next = node->next;
-                struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-                new_node->value = value;
-                new_node->next = next;
-                node->next = new_node;
-            }
-            else {
-                node = node->next; //if it isn't, set node to the next node
+        //for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
+        //    if (i == index) {  //check if i is equal to the index passed
+        //        struct Node* next = node->next;
+        //        struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+        //        new_node->value = value;
+        //        new_node->next = next;
+        //        node->next = new_node;
+        //    } else {
+        //        node = node->next; //if it isn't, set node to the next node
+        //    }
+        //}
+
+        for (int i = 0; i < index; i++) {
+            if (i == index) {
+                if (node->next != nullptr) {
+                    struct Node* next = node->next; //store the indexed node's pointer to the next node.
+                    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node)); //just create a new node.
+                    new_node->value = value; //set the new node's value to the value passed.
+                    new_node->next = next; //just setting the new node's pointer to the next node to the node after the indexed node.
+                } else {
+                    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node)); //just create a new node.
+                    new_node->value = value; //set the value of the new node to the value passed.
+                    node->next = new_node; //set the indexed node's pointer to the next node to the new node.
+                }
+            } else {
+                node = node->next;
             }
         }
     }
