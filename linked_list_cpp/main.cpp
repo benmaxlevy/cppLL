@@ -30,10 +30,11 @@ public:
 
     int add_after(int index, int value) {
         struct Node* node = this->head; //store a pointer to the head node (so that we can loop thru the ll).
-        for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
-            if (i == index) {  //check if i is equal to the index passed
+        for (int i = 0; i < index; i++) { //for loop that increments i by 1 if i is less than the index passed.
+            if (i == index && node->next != nullptr) {  //check if i is equal to the index passed
                 struct Node* next = node->next;
                 struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+                new_node->value = value;
                 new_node->next = next;
                 node->next = new_node;
             }
