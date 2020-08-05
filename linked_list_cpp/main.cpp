@@ -29,44 +29,25 @@ public:
     }
 
     int add_after(int index, int value) {
-        struct Node* node = this->head; //store a pointer to the head node (so that we can loop thru the ll).
-        //for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
-        //    if (i == index) {  //check if i is equal to the index passed
-        //        struct Node* next = node->next;
-        //        struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-        //        new_node->value = value;
-        //        new_node->next = next;
-        //        node->next = new_node;
-        //    } else {
-        //        node = node->next; //if it isn't, set node to the next node
-        //    }
-        //}
-
-        for (int i = 0; i < index; i++) {
-            if (i == index) {
-                if (node->next != nullptr) {
-                    struct Node* next = node->next; //store the indexed node's pointer to the next node.
-                    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node)); //just create a new node.
-                    new_node->value = value; //set the new node's value to the value passed.
-                    new_node->next = next; //just setting the new node's pointer to the next node to the node after the indexed node.
-                } else {
-                    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node)); //just create a new node.
-                    new_node->value = value; //set the value of the new node to the value passed.
-                    node->next = new_node; //set the indexed node's pointer to the next node to the new node.
-                }
-            } else {
-                node = node->next;
+        struct Node* to_add_after =  this->show_one_node(index); 
+        cout<<to_add_after<<endl;
+        if(to_add_after != nullptr){
+            if(to_add_after->next == nullptr){
+                to_add_after->next = (struct Node*)malloc(sizeof(struct Node));
+                to_add_after->next->value = value;
+                return 0;
             }
+        } else {
+            cout<<"Something went wrong! (to_add_after == nullptr)"<<endl;
+            return 1;
         }
     }
 
-    int show_one_value(int index) {
+    struct Node* show_one_node(int index) {
         struct Node* node = this->head; //store a pointer to the head node in variable node.
         for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
             if (i == index) {  //check if i is equal to the index passed
-                cout << node->value << endl;; //if it is, print the value of the node
-                free(node);
-                return 0;
+		return node;
             } else {
                 node = node->next; //if it isn't, set node to the next node
             }
@@ -90,6 +71,6 @@ int main() {
     linked_list->add(1);
     linked_list->add(2);
     linked_list->add(10);
+    linked_list->add_after(2, 5);
     linked_list->show();
-    linked_list->show_one_value(2);
 }
