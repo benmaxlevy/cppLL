@@ -24,8 +24,6 @@ private:
 	/// <returns>A pointer to the new node.</returns>
 	static Node* createNewNode() {
 		auto newNode = (Node*)malloc(sizeof(Node));
-		newNode->value = 0;
-		newNode->next = nullptr;
 		return newNode;
 	}
 
@@ -33,26 +31,42 @@ private:
 	/// Initializes a node with a value of 0 and a next of nullptr.
 	/// </summary>
 	/// <param name="node">A node</param>
-	static void initializeNode(Node* node) {
-		node->value = 0;
-		node->next = nullptr;
+	/// <returns>0 if the initialization was successful, 1 otherwise.</returns>
+	static int initializeNode(Node* node) {
+		// Only initialize the node if it's not nullptr.
+		if (node != nullptr) {
+			node->value = 0;
+			node->next = nullptr;
+			return 0;
+		}
+
+		// We couldn't initialize the node because it's nullptr.
+		return 1;
 	}
 
 public:
 	int add(int value) {
-		if (head == nullptr) { //check if the pointer to the head node is null
-			// Let's extract a method here and make the code more readable. -AJ
-			this->head = createNewNode(); //allocate memory for the pointer to the head node, and allocate memory for the actual node in the heap.
-			this->head->value = value; //set the value of the head node to the value passed.
+		// We always have to make a new node if we're adding a node. Let's create the new node up here to avoid doing it twice. -AJ
+		auto newNode = createNewNode();
+		initializeNode(newNode);
+		newNode->value = value;
+
+		// Now that we have the node set up, we can add it to the linked list. -AJ
+
+		// If there's no head to the linked list, we can just make the new node the head and call it a day. -AJ
+		if (head == nullptr) {
+			this->head = newNode;
 		}
 		else {
-			struct Node* node = this->head; //create a pointer to the pointer of the head node 
+			Node* node = this->head; //create a pointer to the pointer of the head node 
 			while (node->next != nullptr) //check if the next pointer to a node is null
 			{
 				node = node->next; //if the next pointer is null, set node to the next node. (to keep looking).
 			}
-			node->next = (struct Node*)malloc(sizeof(struct Node)); //allocate memory for both the next node's pointer, and the actual node in the heap.
-			node->next->value = value; //set the value of the next node to the value passed.
+
+			// Now that we've created those fancy-shmancy methods and initialized the node at the top, 
+			// there's no more work to be done here other than pointing the end of the list at the new node. -AJ
+			node->next = newNode;
 		}
 		return 0;
 	}
