@@ -166,8 +166,9 @@ public:
 	}
 
 	int show() {
-		// Using auto simplifies things a bit.
-		auto node = this->head; //make a pointer to the head node
+		// Using auto simplifies things a bit. -AJ
+		// Make a pointer to the head node
+		auto node = this->head;
 
 		// Check if the pointer to the node is not null
 		while (node != nullptr) {
