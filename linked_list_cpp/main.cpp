@@ -134,7 +134,8 @@ public:
 		return 0;
 	}
 
-	// Your function show_one_node was good, I just rewrote it slightly to use a while loop and with a different name.
+	// Your function show_one_node was good, I just rewrote it slightly to use a while loop 
+	// and with a different name.
 	/// <summary>
 	/// Gets a node given a specific index.
 	/// </summary>
