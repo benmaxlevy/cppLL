@@ -19,7 +19,7 @@ private:
 	struct Node* head; //create the pointer to head Node.
 
 	/// <summary>
-	/// Creates a new node with a value of 0 and allocates it on the heap.
+	/// Creates a new node, but does not initialize it.
 	/// </summary>
 	/// <returns>A pointer to the new node.</returns>
 	static Node* createNewNode() {
@@ -77,19 +77,29 @@ public:
 	}
 
 	int add_after(int index, int value) {
-		struct Node* to_add_after = this->show_one_node(index);
-		cout << to_add_after << endl;
-		if (to_add_after != nullptr) {
-			if (to_add_after->next == nullptr) {
-				to_add_after->next = (struct Node*)malloc(sizeof(struct Node));
-				to_add_after->next->value = value;
-				return 0;
-			}
-		}
-		else {
-			cout << "Something went wrong! (to_add_after == nullptr)" << endl;
+		auto to_add_after = this->getNodeByIndex(index);
+		
+		// I prefer to handle the unexpected cases like this, but you can totally handle
+		// them like you did before. -AJ
+		// The node to add after is a nullptr, there's no such node at the given index. Fail out.
+		if (to_add_after == nullptr) {
 			return 1;
 		}
+
+		// Create the new node.
+		auto newNode = createNewNode();
+		
+		// Initialize the new node.
+		initializeNode(newNode);
+		newNode->value = value;
+
+		// The next node (after the node we found) needs to be moved to
+		// the next element of the new node we created.
+		newNode->next = to_add_after->next;
+		to_add_after->next = newNode;
+
+		// Operation successful.
+		return 0;
 	}
 	
 	// Your function show_one_node was good, I just rewrote it slightly to use a while loop and with a different name.
