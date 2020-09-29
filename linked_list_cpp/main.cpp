@@ -32,7 +32,9 @@ typedef struct Node {
 	}
 
 	~Node() {
-		delete next;
+		if (next != nullptr) {
+			delete next;
+		}
 	}
 } Node;
 
@@ -83,12 +85,13 @@ public:
 	}
 
 	~LinkedList() {
-		auto current = head;
+		/*auto current = head;
 		while (current != nullptr) {
 			auto next = current->next;
 			delete current;
 			current = next;
-		}
+		}*/
+		delete head;
 	}
 
 	/// <summary>
@@ -212,4 +215,6 @@ int main() {
 	linked_list->add(10);
 	linked_list->addAfter(2, 5);
 	linked_list->show();
+
+	delete linked_list;
 }
