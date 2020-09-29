@@ -63,10 +63,28 @@ public:
 			this->head = newNode;
 		}
 		else {
-			Node* node = this->head; //create a pointer to the pointer of the head node 
-			while (node->next != nullptr) //check if the next pointer to a node is null
+			// Create a pointer to the pointer of the head node 
+			Node* node = this->head;
+			
+			// Here's where your read access violation was happening.
+			// I see what you're doing here. You want to get to the end of the linked list.
+			// Well, what are we doing here? We check if the next element is null, right?
+			// Let's step through this. You create a pointer to the head node above.
+			// That's a perfect start. Now we want to keep looping until we find nullptr, right?
+			// Right. But not quite. What you've done here is so close to right, except for one
+			// tiny detail. What do we do while we loop? We move to the next element.
+			// Then you check the *next* element of the next element. Can you see how that's not right?
+			// What if when we move to the next element we get to nullptr? nullptr has no field
+			// called next. In fact, nullptr has no fields. No methods. Nothing. It's nullptr.
+			// So instead of 
+			//	  while (node->next != nullptr)
+			// We'll do
+			//  while (node != nullptr)
+			
+			// Search for the end of the list
+			while (node != nullptr)
 			{
-				node = node->next; //if the next pointer is null, set node to the next node. (to keep looking).
+				node = node->next;
 			}
 
 			// Now that we've created those fancy-shmancy methods and initialized the node at the top, 
