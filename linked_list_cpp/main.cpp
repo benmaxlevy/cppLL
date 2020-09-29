@@ -45,6 +45,11 @@ private:
 	}
 
 public:
+	/// <summary>
+	/// Adds a node to the end of the linked list.
+	/// </summary>
+	/// <param name="value">The value to add to the end of the linked list.</param>
+	/// <returns>0 if the operation was successful.</returns>
 	int add(int value) {
 		// We always have to make a new node if we're adding a node. Let's create the new node up here to avoid doing it twice. -AJ
 		auto newNode = createNewNode();
