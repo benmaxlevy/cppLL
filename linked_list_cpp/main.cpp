@@ -21,6 +21,9 @@ typedef struct Node {
 
 
 // What's an LL? Let's rename this so it's more clear about what this class does. Use F2 in Visual Studio to rename an element. -AJ
+/// <summary>
+/// Represents a singly-linked list.
+/// </summary>
 class LinkedList {
 private:
     Node* head; //create the pointer to head Node.
