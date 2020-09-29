@@ -9,7 +9,9 @@ typedef struct Node {
 	struct Node* next = nullptr; //create the pointer to the next Node
 } Node;
 
-class LL {
+
+// What's an LL? Let's rename this so it's more clear about what this class does. Use F2 in Visual Studio to rename an element. -AJ
+class LinkedList {
 private:
 	struct Node* head; //create the pointer to head Node.
 public:
@@ -71,7 +73,7 @@ public:
 };
 
 int main() {
-	LL* linked_list = new LL;
+	LinkedList* linked_list = new LinkedList;
 	linked_list->add(1);
 	linked_list->add(2);
 	linked_list->add(10);
