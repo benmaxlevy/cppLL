@@ -85,12 +85,6 @@ public:
 	}
 
 	~LinkedList() {
-		/*auto current = head;
-		while (current != nullptr) {
-			auto next = current->next;
-			delete current;
-			current = next;
-		}*/
 		delete head;
 	}
 
