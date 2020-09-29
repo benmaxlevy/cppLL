@@ -17,6 +17,23 @@ typedef struct Node {
 	/// The next node.
 	/// </summary>
 	Node* next = nullptr;
+
+	Node() : Node(0, nullptr) {
+
+	}
+
+	Node(int value) : Node(value, nullptr) {
+
+	}
+
+	Node(int value, Node* next) {
+		this->value = value;
+		this->next = next;
+	}
+
+	~Node() {
+		delete next;
+	}
 } Node;
 
 
@@ -33,7 +50,7 @@ private:
 	/// </summary>
 	/// <returns>A pointer to the new node.</returns>
 	static Node* createNewNode() {
-		auto newNode = (Node*)malloc(sizeof(Node));
+		auto newNode = new Node;
 		return newNode;
 	}
 
