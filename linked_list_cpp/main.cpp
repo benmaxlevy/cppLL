@@ -3,10 +3,11 @@
 
 using namespace std;
 
-struct Node {
+// Let's change this to a typedef to save ourselves the agony of using "struct Node" everywhere. -AJ
+typedef struct Node {
 	int value;
 	struct Node* next = nullptr; //create the pointer to the next Node
-};
+} Node;
 
 class LL {
 private:
