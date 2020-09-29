@@ -69,7 +69,7 @@ public:
     /// <returns>0 if the operation was successful.</returns>
     int add(int value) {
         // We always have to make a new node if we're adding a node. Let's create the new node up here to avoid doing it twice. -AJ
-        Node* newNode = createNewNode();
+        auto newNode = createNewNode();
         initializeNode(newNode);
         newNode->value = value;
 
@@ -81,17 +81,17 @@ public:
         }
         else {
             // Create a pointer to the pointer of the head node 
-            Node* n = this->head;
+            auto node = this->head;
                         
             // Search for the end of the list
-            while (n->next != nullptr)
+            while (node->next != nullptr)
             {
-                n = n->next;
+                node = node->next;
             }
 
             // Now that we've created those fancy-shmancy methods and initialized the node at the top, 
             // there's no more work to be done here other than pointing the end of the list at the new node. -AJ
-            n->next = newNode;
+            node->next = newNode;
         }
         return 0;
     }
@@ -160,7 +160,8 @@ public:
         // Check if the pointer to the node is not null
         while (node != nullptr) {
             // Print the value of the node
-            cout << node->value << endl;
+            // Add some spacing to make elements more clear. -AJ
+            cout << node->value << ' ' << endl;
             
             // Set the node to the next node. (to keep looking).
             node = node->next;
@@ -171,15 +172,6 @@ public:
         return 0;
     }
 
-    void print() {
-        auto currentNode = this->head;
-        while (currentNode != nullptr) {
-            std::cout << currentNode->value << ' ';
-            currentNode = currentNode->next;
-        }
-        std::cout << std::endl;
-    }
-
 };
 
 int main() {
@@ -188,5 +180,5 @@ int main() {
     linked_list->add(2);
     linked_list->add(10);
     linked_list->add_after(2, 5);
-    linked_list->print();
+    linked_list->show();
 }
