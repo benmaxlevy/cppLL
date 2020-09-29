@@ -86,17 +86,36 @@ public:
 			return 1;
 		}
 	}
+	
+	// Your function show_one_node was good, I just rewrote it slightly to use a while loop and with a different name.
+	/// <summary>
+	/// Gets a node given a specific index.
+	/// </summary>
+	/// <param name="index">The index of the node to get.</param>
+	/// <returns>The node at index or nullptr if no such node exists.</returns>
+	Node* getNodeByIndex(int index) {
+		// Store a pointer to the current node, starting at the head of the list.
+		auto currentNode = this->head;
 
-	struct Node* show_one_node(int index) {
-		struct Node* node = this->head; //store a pointer to the head node in variable node.
-		for (int i = 0; node->next != nullptr; i++) { //for loop that increments i by 1 if the pointer to the next node isn't null.
-			if (i == index) {  //check if i is equal to the index passed
-				return node;
+		// Keep track of the current index.
+		int currentIndex = 0;
+
+		// Keep looping while we have a node that isn't nullptr.
+		while (currentNode != nullptr) {
+			// If we get to the node with the right index, great! Return it.
+			if (currentIndex == index) {
+				return currentNode;
 			}
-			else {
-				node = node->next; //if it isn't, set node to the next node
-			}
+			
+			// Otherwise, keep looping. Increment the current index.
+			currentIndex++;
+
+			// Move to the next node.
+			currentNode = currentNode->next;
 		}
+
+		// No such node exists. That's very sad. Return nullptr to signal that there's no node.
+		return nullptr;
 	}
 
 	int show() {
