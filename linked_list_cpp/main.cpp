@@ -99,7 +99,7 @@ public:
         return 0;
     }
 
-    int add_after(int index, int value) {
+    int addAfter(int index, int value) {
         auto to_add_after = this->getNodeByIndex(index);
         
         // I prefer to handle the unexpected cases like this, but you can totally handle
@@ -182,6 +182,6 @@ int main() {
     linked_list->add(1);
     linked_list->add(2);
     linked_list->add(10);
-    linked_list->add_after(2, 5);
+    linked_list->addAfter(2, 5);
     linked_list->show();
 }
