@@ -23,7 +23,7 @@ typedef struct Node {
 // What's an LL? Let's rename this so it's more clear about what this class does. Use F2 in Visual Studio to rename an element. -AJ
 class LinkedList {
 private:
-    struct Node* head; //create the pointer to head Node.
+    Node* head; //create the pointer to head Node.
 
     /// <summary>
     /// Creates a new node, but does not initialize it.
@@ -52,6 +52,16 @@ private:
     }
 
 public:
+    // I'm pretty sure the problem was that you didn't have a constructor
+    // and you didn't initialize the head of the list.
+    /// <summary>
+    /// Creates a new LinkedList.
+    /// </summary>
+    LinkedList()
+    {
+        this->head = nullptr;
+    }
+
     /// <summary>
     /// Adds a node to the end of the linked list.
     /// </summary>
@@ -59,7 +69,7 @@ public:
     /// <returns>0 if the operation was successful.</returns>
     int add(int value) {
         // We always have to make a new node if we're adding a node. Let's create the new node up here to avoid doing it twice. -AJ
-        auto newNode = createNewNode();
+        Node* newNode = createNewNode();
         initializeNode(newNode);
         newNode->value = value;
 
@@ -71,17 +81,17 @@ public:
         }
         else {
             // Create a pointer to the pointer of the head node 
-            auto p = this->head;
+            Node* n = this->head;
                         
             // Search for the end of the list
-            while (p->next != nullptr)
+            while (n->next != nullptr)
             {
-                p = p->next;
+                n = n->next;
             }
 
             // Now that we've created those fancy-shmancy methods and initialized the node at the top, 
             // there's no more work to be done here other than pointing the end of the list at the new node. -AJ
-            p->next = newNode;
+            n->next = newNode;
         }
         return 0;
     }
@@ -164,8 +174,10 @@ public:
     void print() {
         auto currentNode = this->head;
         while (currentNode != nullptr) {
-            std::cout << currentNode->value << ' ' << std::endl;
+            std::cout << currentNode->value << ' ';
+            currentNode = currentNode->next;
         }
+        std::cout << std::endl;
     }
 
 };
