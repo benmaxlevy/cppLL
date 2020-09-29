@@ -4,6 +4,9 @@
 using namespace std;
 
 // Let's change this to a typedef to save ourselves the agony of using "struct Node" everywhere. -AJ
+/// <summary>
+/// Represents a node of a linked list.
+/// </summary>
 typedef struct Node {
 	int value;
 	struct Node* next = nullptr; //create the pointer to the next Node
@@ -14,10 +17,32 @@ typedef struct Node {
 class LinkedList {
 private:
 	struct Node* head; //create the pointer to head Node.
+
+	/// <summary>
+	/// Creates a new node with a value of 0 and allocates it on the heap.
+	/// </summary>
+	/// <returns>A pointer to the new node.</returns>
+	static Node* createNewNode() {
+		auto newNode = (Node*)malloc(sizeof(Node));
+		newNode->value = 0;
+		newNode->next = nullptr;
+		return newNode;
+	}
+
+	/// <summary>
+	/// Initializes a node with a value of 0 and a next of nullptr.
+	/// </summary>
+	/// <param name="node">A node</param>
+	static void initializeNode(Node* node) {
+		node->value = 0;
+		node->next = nullptr;
+	}
+
 public:
 	int add(int value) {
 		if (head == nullptr) { //check if the pointer to the head node is null
-			this->head = (struct Node*)malloc(sizeof(struct Node)); //allocate memory for the pointer to the head node, and allocate memory for the actual node in the heap.
+			// Let's extract a method here and make the code more readable. -AJ
+			this->head = createNewNode(); //allocate memory for the pointer to the head node, and allocate memory for the actual node in the heap.
 			this->head->value = value; //set the value of the head node to the value passed.
 		}
 		else {
