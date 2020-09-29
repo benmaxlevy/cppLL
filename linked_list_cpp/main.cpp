@@ -77,12 +77,12 @@ public:
             // What if when we move to the next element we get to nullptr? nullptr has no field
             // called next. In fact, nullptr has no fields. No methods. Nothing. It's nullptr.
             // So instead of 
-            //	  while (node->next != nullptr)
+            //     while (node->next != nullptr)
             // We'll do
-            //  while (node != nullptr)
+            //     while (node != nullptr)
             
             // Search for the end of the list
-            while (node != nullptr)
+            while (node->next != nullptr)
             {
                 node = node->next;
             }
