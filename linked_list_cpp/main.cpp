@@ -134,12 +134,20 @@ public:
 	}
 
 	int show() {
-		struct Node* node = this->head; //make a pointer to the head node
-		while (node != nullptr) { //check if the pointer to the node is not null
-			cout << node->value << endl; //print the value of the node
-			node = node->next; //set the node to the next node. (to keep looking).
+		// Using auto simplifies things a bit.
+		auto node = this->head; //make a pointer to the head node
+		
+		// Check if the pointer to the node is not null
+		while (node != nullptr) {
+			// Print the value of the node
+			cout << node->value << endl;
+			
+			// Set the node to the next node. (to keep looking).
+			node = node->next;
 		}
-		free(node);
+
+		// Why free the node? No need if we're just showing the elements. -AJ
+		//free(node);
 		return 0;
 	}
 
